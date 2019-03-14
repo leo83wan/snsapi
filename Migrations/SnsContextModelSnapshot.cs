@@ -68,13 +68,13 @@ namespace SNS.Migrations
                 {
                     b.Property<int>("AccountId");
 
-                    b.Property<DateTime>("CreatedAt");
-
                     b.Property<string>("Role");
+
+                    b.Property<DateTime>("CreatedAt");
 
                     b.Property<DateTime?>("UpdatedAt");
 
-                    b.HasKey("AccountId");
+                    b.HasKey("AccountId", "Role");
 
                     b.ToTable("AccountRoles");
                 });

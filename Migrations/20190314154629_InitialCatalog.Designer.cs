@@ -9,7 +9,7 @@ using com.leo83.apis.sns.Data.v1;
 namespace SNS.Migrations
 {
     [DbContext(typeof(SnsContext))]
-    [Migration("20190313155353_InitialCatalog")]
+    [Migration("20190314154629_InitialCatalog")]
     partial class InitialCatalog
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -70,13 +70,13 @@ namespace SNS.Migrations
                 {
                     b.Property<int>("AccountId");
 
-                    b.Property<DateTime>("CreatedAt");
-
                     b.Property<string>("Role");
+
+                    b.Property<DateTime>("CreatedAt");
 
                     b.Property<DateTime?>("UpdatedAt");
 
-                    b.HasKey("AccountId");
+                    b.HasKey("AccountId", "Role");
 
                     b.ToTable("AccountRoles");
                 });

@@ -102,8 +102,9 @@ namespace com.leo83.apis.sns
                 c.AddSecurityRequirement(
                     new Dictionary<string, IEnumerable<string>>
                     {
-                        { "Bearer",
-                          Enumerable.Empty<string>()
+                        { 
+                            "Bearer",
+                            Enumerable.Empty<string>()
                         },
                     });
                 // 为 Swagger JSON and UI设置xml文档注释路径

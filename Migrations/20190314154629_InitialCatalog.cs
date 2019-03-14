@@ -54,13 +54,13 @@ namespace SNS.Migrations
                 columns: table => new
                 {
                     AccountId = table.Column<int>(nullable: false),
-                    Role = table.Column<string>(nullable: true),
+                    Role = table.Column<string>(nullable: false),
                     CreatedAt = table.Column<DateTime>(nullable: false),
                     UpdatedAt = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AccountRoles", x => x.AccountId);
+                    table.PrimaryKey("PK_AccountRoles", x => new { x.AccountId, x.Role });
                     table.ForeignKey(
                         name: "FK_AccountRoles_Accounts_AccountId",
                         column: x => x.AccountId,

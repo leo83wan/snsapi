@@ -55,10 +55,12 @@ namespace com.leo83.apis.sns.Controllers.v1
                 // push the user’s name into a claim, so we can identify the user later on.
                 var claims = new[]
                 {
-                    new Claim(ClaimTypes.Role, "User"),
-                    new Claim(ClaimTypes.Role, "Admin"),
                     new Claim(ClaimTypes.Name, request.Username)
                 };
+                foreach (var role in account.Roles)
+                {
+                    claims.Append(new Claim(ClaimTypes.Role, role.Role));
+                }
                 //sign the token using a secret key.This secret will be shared between your API and anything that needs to check that the token is legit.
                 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["SecurityKey"]));
                 var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

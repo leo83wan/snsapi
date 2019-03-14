@@ -19,7 +19,6 @@ namespace com.leo83.apis.sns.Extensions
             swaggerDoc.Tags = new List<Tag> {
                 new Tag { Name = "Common", Description = "通用接口" },
                 new Tag { Name = "User", Description = "用户接口" },
-                new Tag { Name = "Auditor", Description = "审核员接口" },
                 new Tag { Name = "Administrator", Description = "管理员接口" }
             };
         }

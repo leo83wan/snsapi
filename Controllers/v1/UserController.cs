@@ -12,9 +12,10 @@ namespace com.leo83.apis.sns.Controllers
     /// <summary>
     /// 用户控制器
     /// </summary>
-    [Route("api/users")]
+    [Route("api/user")]
     [ApiController]
     [ApiVersion("1.0")]
+    [Authorize(Roles = "User")]
     public class UserController : ControllerBase
     {
         /// <summary>
@@ -30,7 +31,7 @@ namespace com.leo83.apis.sns.Controllers
         /// </summary>
         /// <param name="context"></param>
         /// <param name="configuration"></param>
-        public UserController(SnsContext context, IConfiguration configuration) 
+        public UserController(SnsContext context, IConfiguration configuration)
         {
             _context = context;
             _configuration = configuration;
@@ -43,7 +44,6 @@ namespace com.leo83.apis.sns.Controllers
         /// <returns></returns>
         [Route("password")]
         [HttpPost]
-        [Authorize]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
@@ -51,11 +51,13 @@ namespace com.leo83.apis.sns.Controllers
         {
             var account = _context.Accounts.Where(w => w.Username == User.Identity.Name).FirstOrDefault();
 
-            if (account != null && account.Password == StringTools.Encrypt(passwordRequest.Password)) {
+            if (account != null && account.Password == StringTools.Encrypt(passwordRequest.Password))
+            {
                 account.Password = StringTools.Encrypt(passwordRequest.NewPassword);
             }
 
-            if (0 < _context.SaveChanges()){
+            if (0 < _context.SaveChanges())
+            {
                 return Ok("ok");
             }
 

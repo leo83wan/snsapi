@@ -66,8 +66,8 @@ namespace com.leo83.apis.sns.Data.v1
             modelBuilder.Entity<Account>().HasOne(a => a.Info).WithOne(ai => ai.Account).HasForeignKey<AccountInfo>(ai => ai.AccountId);
             modelBuilder.Entity<Account>().HasMany(a => a.Roles).WithOne(ar => ar.Account).HasForeignKey(ar => ar.AccountId);
             modelBuilder.Entity<AccountInfo>().HasKey(ai => ai.AccountId);
-            modelBuilder.Entity<AccountRole>().HasKey(ar => ar.AccountId);
-        
+            modelBuilder.Entity<AccountRole>().HasKey(ar => new { ar.AccountId, ar.Role });
+
 
             // modelBuilder.Entity<VideoCategory>()
             // .HasIndex(t => t.Name).IsUnique();
